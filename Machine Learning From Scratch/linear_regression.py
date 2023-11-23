@@ -19,15 +19,16 @@ class LinearRegression():
         max_iters = 1000
         while t < max_iters:
             t += 1
-            y_pred = self.predict(opt_weights) # current prediction for current weights
+            y_pred = self.predict(self.x, opt_weights) # current prediction for current weights
             xt = np.transpose(self.x)
             err = y_pred-self.y
             opt_weights = opt_weights - (alpha / m) *  xt@err # update based on gradient of loss fcn
         self.weights = opt_weights
     
     # generate prediction for given weights, used in training
-    def predict(self,weights):
-        return self.x@weights
+    @staticmethod
+    def predict(x,weights):
+        return x@weights
 
     # make forecasts based on optimal weights
     def forecast(self):
